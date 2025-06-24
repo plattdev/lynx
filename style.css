@@ -1,0 +1,86 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    margin: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+h1, h2 {
+    font-weight: 700;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* --- CABECERA Y PIE DE PÁGINA --- */
+.main-header, .main-footer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+}
+
+/* --- ESTRUCTURA SCROLLYTELLING --- */
+#scrolly-container {
+    position: relative;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.scroll-text {
+    width: 45%;
+    padding: 0 5%;
+}
+
+.sticky-chart {
+    width: 55%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10vh; /* Centrado verticalmente */
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+}
+
+.step.is-active {
+    opacity: 1;
+}
+
+/* --- ESTILOS DEL GRÁFICO (D3) --- */
+.bar {
+    fill: #4682B4; /* Azul acero */
+    transition: fill 0.5s;
+}
+
+.bar.highlight {
+    fill: #2E8B57; /* Verde mar */
+}
+
+.axis-label {
+    font-size: 0.9em;
+    fill: #555;
+}
+
+.tick text {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1em;
+}
