@@ -28,25 +28,26 @@ d3.csv("data.csv").then(function(data) {
     const y = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.population)])
       .range([ height, 0]);
+   
 
     // --- EJES ---
     svg.append("g")
       .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x))
       .selectAll("text")
-        .style("text-anchor", "end");
     
     svg.append("g")
       .call(d3.axisLeft(y));
 
     // Añadir etiqueta al eje Y
-    svg.append("text")
-        .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("y", -margin.left + 20)
-        .attr("x", -height/2 + 50)
-        .attr("transform", "rotate(-90)")
-        .text("Población estimada de linces");
+svg.append("text")
+    .attr("class", "axis-label")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left) // Posiciona justo en el borde del margen
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em") // mueve el texto un poco más allá de la línea del eje
+    .style("text-anchor", "middle")
+    .text("Población estimada de linces");
 
 
     // --- BARRAS (inicialmente invisibles) ---
@@ -60,6 +61,20 @@ d3.csv("data.csv").then(function(data) {
         .attr("y", d => y(0)) // Empiezan en 0
         .attr("height", 0);   // Con altura 0
 
+    // Añadir etiqueta a las barras
+    const labels = svg.selectAll(".bar-label")
+    .data(data)
+    .enter()
+    .append("text")
+        .attr("class", "bar-label")
+        // Posición X: en el centro de la barra
+        .attr("x", d => x(d.year) + x.bandwidth() / 2)
+        // Posición Y: un poco por encima de la barra
+        .attr("y", d => y(d.population) - 5) 
+        // El texto que se mostrará es el de la población
+        .text(d => d.population)
+        // Opacidad inicial en 0 para que aparezcan con la animación
+        .style("opacity", 0);
 
     // --- 4. CONFIGURACIÓN DE SCROLLAMA ---
     const scroller = scrollama();
@@ -93,8 +108,14 @@ d3.csv("data.csv").then(function(data) {
           .attr("y", d => visibleYears.includes(d.year) ? y(d.population) : y(0))
           .attr("height", d => visibleYears.includes(d.year) ? height - y(d.population) : 0)
           .attr("class", d => d.year === '2024' && visibleYears.includes('2024') ? "bar highlight" : "bar");
-    }
 
+        // Actualizar la opacidad de las ETIQUETAS para que coincida con las barras
+        labels
+        .transition().duration(500)
+        .style("opacity", d => visibleYears.includes(d.year) ? 1 : 0);
+    }
+    
+    // Configurar Scrollama
     scroller
       .setup({
         step: ".scroll-text .step",

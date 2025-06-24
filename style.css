@@ -3,7 +3,25 @@ body {
     font-family: 'Source Sans 3', sans-serif;
     margin: 0;
     color: #333;
-    background-color: #f9f9f9;
+    background-image: url('images/lince_fondo.jpg.webp');
+    background-size: cover; /* Para que la imagen cubra todo el fondo */
+    background-position: center center; /* Para que la imagen esté centrada */
+    background-attachment: fixed; /* la imagen no se mueve al hacer scroll */
+}
+/* Esto crea una capa blanca semitransparente sobre la imagen */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Blanco con 60% de opacidad - más transparente */
+    z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
+}
+
+h1 {
+    color: #0d5e17; /* Un color oscuro para el texto */
 }
 
 h1, h2 {
@@ -14,6 +32,16 @@ p {
     line-height: 1.6;
     font-size: 1.1rem;
 }
+
+
+/* --- ESTRUCTURA Y CAPAS PRINCIPALES --- */
+/* Esta regla unificada asegura que todos los contenedores principales
+   estén por encima del velo de fondo. */
+.main-header, .main-footer, #scrolly-container {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* --- CABECERA Y PIE DE PÁGINA --- */
 .main-header, .main-footer {
@@ -29,7 +57,6 @@ p {
 
 /* --- ESTRUCTURA SCROLLYTELLING --- */
 #scrolly-container {
-    position: relative;
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
@@ -67,12 +94,19 @@ p {
 
 /* --- ESTILOS DEL GRÁFICO (D3) --- */
 .bar {
-    fill: #4682B4; /* Azul acero */
+    fill: #4682B4; 
     transition: fill 0.5s;
 }
 
 .bar.highlight {
-    fill: #2E8B57; /* Verde mar */
+    fill: #2E8B57; 
+}
+
+.bar-label {
+    text-anchor: middle; /* Centra el texto horizontalmente */
+    font-size: 0.9rem;
+    font-weight: 600;
+    fill: #555; /* Un color de texto un poco más suave */
 }
 
 .axis-label {
