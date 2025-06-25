@@ -1,7 +1,19 @@
-// --- 1. CONFIGURACIÓN INICIAL ---
-const margin = {top: 20, right: 30, bottom: 50, left: 60},
-      width = 600 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+// --- 1. CONFIGURACIÓN INICIAL RESPONSIVA ---
+// Get container width for responsive design
+const container = d3.select("#chart").node();
+const containerWidth = container.getBoundingClientRect().width;
+
+// Adjust dimensions based on screen size
+const isMobile = window.innerWidth <= 768;
+const margin = {
+    top: 20, 
+    right: isMobile ? 20 : 30, 
+    bottom: isMobile ? 60 : 50, 
+    left: isMobile ? 50 : 60
+};
+
+const width = Math.min(containerWidth, isMobile ? 350 : 600) - margin.left - margin.right;
+const height = (isMobile ? 300 : 400) - margin.top - margin.bottom;
 
 // --- 2. CREAR LIENZO SVG ---
 const svg = d3.select("#chart")
@@ -43,9 +55,9 @@ d3.csv("data.csv").then(function(data) {
 svg.append("text")
     .attr("class", "axis-label")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left) // Posiciona justo en el borde del margen
+    .attr("y", 0 - margin.left) // Posición original sin separación adicional
     .attr("x", 0 - (height / 2))
-    .attr("dy", "1em") // mueve el texto un poco más allá de la línea del eje
+    .attr("dy", "0.65em") // mueve el texto un poco más allá de la línea del eje
     .style("text-anchor", "middle")
     .text("Población estimada de linces");
 

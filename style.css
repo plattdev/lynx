@@ -104,17 +104,109 @@ p {
 
 .bar-label {
     text-anchor: middle; /* Centra el texto horizontalmente */
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 1 rem;
+    font-weight: 700;
     fill: #555; /* Un color de texto un poco más suave */
 }
 
 .axis-label {
-    font-size: 0.9em;
+    font-size: 1.1em; /* Aumentado de 0.9em a 1.1em */
     fill: #555;
+}
+
+/* Separación específica para el título del eje Y */
+.y-axis-label {
+    font-size: 1.1em;
+    fill: #555;
+    /* Sin transform para evitar conflictos con la rotación */
 }
 
 .tick text {
     font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.1em;
+    font-size: 1.5em;
+}
+
+/* --- RESPONSIVE DESIGN FOR MOBILE --- */
+@media screen and (max-width: 768px) {
+    /* Background image adjustments for mobile */
+    body {
+        background-attachment: scroll; /* Fixed backgrounds can cause issues on mobile */
+    }
+    
+    /* Header adjustments */
+    .main-header h1 {
+        font-size: 2rem; /* Smaller title on mobile */
+    }
+    
+    .main-header, .main-footer {
+        padding: 20px 15px; /* Reduced padding */
+    }
+    
+    /* Scrollytelling layout - stack vertically on mobile */
+    #scrolly-container {
+        flex-direction: column; /* Stack text and chart vertically */
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .scroll-text {
+        width: 100%; /* Full width for text */
+        padding: 0;
+        order: 1; /* Text comes first */
+    }
+    
+    .sticky-chart {
+        width: 100%; /* Full width for chart */
+        position: relative; /* Remove sticky behavior on mobile */
+        height: 50vh; /* Smaller height */
+        order: 2; /* Chart comes after text */
+        margin: 20px 0;
+    }
+    
+    /* Step adjustments */
+    .step {
+        min-height: 60vh; /* Smaller step height */
+        padding: 15px 0;
+    }
+    
+    /* Text size adjustments */
+    p {
+        font-size: 1rem; /* Slightly smaller text */
+    }
+    
+    /* Chart text adjustments */
+    .tick text {
+        font-size: 1.2em; /* Smaller axis numbers */
+    }
+    
+    .bar-label {
+        font-size: 0.9rem; /* Smaller bar labels */
+    }
+    
+    .axis-label, .y-axis-label {
+        font-size: 1em; /* Smaller axis labels */
+    }
+}
+
+/* Additional adjustments for very small screens */
+@media screen and (max-width: 480px) {
+    .main-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .sticky-chart {
+        height: 40vh; /* Even smaller chart height */
+    }
+    
+    .step {
+        min-height: 50vh;
+    }
+    
+    .tick text {
+        font-size: 1em;
+    }
+    
+    .bar-label {
+        font-size: 0.8rem;
+    }
 }
