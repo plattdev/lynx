@@ -1,19 +1,7 @@
-// --- 1. CONFIGURACIÓN INICIAL RESPONSIVA ---
-// Get container width for responsive design
-const container = d3.select("#chart").node();
-const containerWidth = container.getBoundingClientRect().width;
-
-// Adjust dimensions based on screen size
-const isMobile = window.innerWidth <= 768;
-const margin = {
-    top: 20, 
-    right: isMobile ? 20 : 30, 
-    bottom: isMobile ? 60 : 50, 
-    left: isMobile ? 50 : 60
-};
-
-const width = Math.min(containerWidth, isMobile ? 350 : 600) - margin.left - margin.right;
-const height = (isMobile ? 300 : 400) - margin.top - margin.bottom;
+// --- 1. CONFIGURACIÓN INICIAL ---
+const margin = {top: 20, right: 30, bottom: 50, left: 60},
+      width = 600 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
 // --- 2. CREAR LIENZO SVG ---
 const svg = d3.select("#chart")
@@ -25,11 +13,14 @@ const svg = d3.select("#chart")
 
 // --- 3. CARGAR DATOS Y DIBUJAR GRÁFICO ---
 d3.csv("data.csv").then(function(data) {
+    console.log("Datos cargados:", data); // Debug
 
     // Convertir población a número
     data.forEach(d => {
         d.population = +d.population;
     });
+
+    console.log("Datos procesados:", data); // Debug
 
     // --- ESCALAS ---
     const x = d3.scaleBand()
@@ -94,7 +85,6 @@ svg.append("text")
     function handleStepEnter(response) {
         // response.index es el índice del paso actual (0, 1, 2...)
         const stepIndex = response.index;
-        const stepElement = response.element;
         
         // Resaltar el paso de texto actual
         d3.selectAll('.step').classed('is-active', (d, i) => i === stepIndex);
