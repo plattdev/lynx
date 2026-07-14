@@ -228,6 +228,21 @@ p {
   fill: #2e8b57;
 }
 
+.bar-portugal {
+  fill: #9b2226; /* segmento apilado de Portugal, distinto del de España */
+  transition: fill 0.5s;
+}
+
+.chart-legend rect {
+  stroke: none;
+}
+
+.chart-legend text {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.75em;
+  fill: #555;
+}
+
 .bar-label {
   text-anchor: middle; /* Centra el texto horizontalmente */
   font-size: 1 rem;

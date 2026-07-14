@@ -21,12 +21,21 @@ const svg = d3
 d3.csv("data.csv").then(function (data) {
   console.log("Datos cargados:", data); // Debug
 
-  // Convertir población a número
+  // Convertir a número y calcular el total (España + Portugal)
   data.forEach((d) => {
-    d.population = +d.population;
+    d.spain = +d.spain;
+    d.portugal = +d.portugal;
+    d.total = d.spain + d.portugal;
   });
 
   console.log("Datos procesados:", data); // Debug
+
+  // Apilamos las dos series (España abajo, Portugal arriba) para
+  // poder dibujar barras compuestas que muestren la contribución de
+  // cada país al total.
+  const series = d3.stack().keys(["spain", "portugal"])(data);
+  const spainSeries = series[0];
+  const portugalSeries = series[1];
 
   // --- ESCALAS ---
   const x = d3
@@ -37,7 +46,7 @@ d3.csv("data.csv").then(function (data) {
 
   const y = d3
     .scaleLinear()
-    .domain([0, d3.max(data, (d) => d.population)])
+    .domain([0, d3.max(data, (d) => d.total) * 1.08])
     .range([height, 0]);
 
   // --- EJES ---
@@ -60,19 +69,55 @@ d3.csv("data.csv").then(function (data) {
     .style("text-anchor", "middle")
     .text("Población estimada de linces");
 
+  // --- LEYENDA (España / Portugal) ---
+  // Se coloca en la esquina superior izquierda para no chocar con las
+  // etiquetas de las barras más altas (las de los años recientes, a la derecha).
+  const legend = svg
+    .append("g")
+    .attr("class", "chart-legend")
+    .attr("transform", "translate(0, -14)");
+
+  legend
+    .append("rect")
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("class", "bar");
+  legend.append("text").attr("x", 18).attr("y", 10).text("España");
+
+  legend
+    .append("rect")
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("y", 18)
+    .attr("class", "bar-portugal");
+  legend.append("text").attr("x", 18).attr("y", 28).text("Portugal");
+
   // --- BARRAS (inicialmente invisibles) ---
-  const bars = svg
-    .selectAll("mybar")
-    .data(data)
+  // Segmento inferior: España
+  const spainBars = svg
+    .selectAll(".bar-spain")
+    .data(spainSeries)
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", (d) => x(d.year))
+    .attr("x", (d) => x(d.data.year))
     .attr("width", x.bandwidth())
     .attr("y", (d) => y(0)) // Empiezan en 0
     .attr("height", 0); // Con altura 0
 
-  // Añadir etiqueta a las barras
+  // Segmento superior: Portugal (se apila sobre el de España)
+  const portugalBars = svg
+    .selectAll(".bar-portugal-rect")
+    .data(portugalSeries)
+    .enter()
+    .append("rect")
+    .attr("class", "bar-portugal")
+    .attr("x", (d) => x(d.data.year))
+    .attr("width", x.bandwidth())
+    .attr("y", (d) => y(0))
+    .attr("height", 0);
+
+  // Añadir etiqueta a las barras (con el total combinado)
   const labels = svg
     .selectAll(".bar-label")
     .data(data)
@@ -82,9 +127,9 @@ d3.csv("data.csv").then(function (data) {
     // Posición X: en el centro de la barra
     .attr("x", (d) => x(d.year) + x.bandwidth() / 2)
     // Posición Y: un poco por encima de la barra
-    .attr("y", (d) => y(d.population) - 5)
-    // El texto que se mostrará es el de la población
-    .text((d) => d.population)
+    .attr("y", (d) => y(d.total) - 5)
+    // El texto que se mostrará es el total (España + Portugal)
+    .text((d) => d.total)
     // Opacidad inicial en 0 para que aparezcan con la animación
     .style("opacity", 0);
 
@@ -115,22 +160,53 @@ d3.csv("data.csv").then(function (data) {
       visibleYears = ["2002", "2008", "2015", "2020"];
     } else if (index === 3) {
       // Paso 4
-      visibleYears = ["2002", "2008", "2015", "2020", "2024"];
+      visibleYears = [
+        "2002",
+        "2008",
+        "2015",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+      ];
+    } else if (index === 4) {
+      // Paso 5
+      visibleYears = [
+        "2002",
+        "2008",
+        "2015",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+      ];
     }
 
-    bars
+    // El año más reciente revelado se resalta en verde sobre el mapa de barras
+    const highlightYear = visibleYears.at(-1);
+
+    spainBars
       .transition()
       .duration(500)
-      .attr("y", (d) =>
-        visibleYears.includes(d.year) ? y(d.population) : y(0),
-      )
+      .attr("y", (d) => (visibleYears.includes(d.data.year) ? y(d[1]) : y(0)))
       .attr("height", (d) =>
-        visibleYears.includes(d.year) ? height - y(d.population) : 0,
+        visibleYears.includes(d.data.year) ? y(d[0]) - y(d[1]) : 0,
       )
       .attr("class", (d) =>
-        d.year === "2024" && visibleYears.includes("2024")
+        d.data.year === highlightYear && visibleYears.includes(d.data.year)
           ? "bar highlight"
           : "bar",
+      );
+
+    portugalBars
+      .transition()
+      .duration(500)
+      .attr("y", (d) => (visibleYears.includes(d.data.year) ? y(d[1]) : y(0)))
+      .attr("height", (d) =>
+        visibleYears.includes(d.data.year) ? y(d[0]) - y(d[1]) : 0,
       );
 
     // Actualizar la opacidad de las ETIQUETAS para que coincida con las barras
