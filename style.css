@@ -97,6 +97,13 @@ p {
 
 .main-header {
   position: relative;
+  --header-title-size: clamp(1.6rem, 5vw, 2.5rem);
+  /* Espacio extra alrededor del título, calculado a partir de su tamaño,
+     para que la ilustración del lince nunca quede recortada por el
+     borde de la ventana (tablet y desktop incluidos). */
+  padding-top: calc(20px + 2.4 * var(--header-title-size));
+  padding-left: calc(20px + 1 * var(--header-title-size));
+  padding-right: calc(20px + 1 * var(--header-title-size));
 }
 
 .brand-mark {
@@ -108,7 +115,7 @@ p {
   position: absolute;
   width: 4em; /* escala junto al tamaño fluido del h1 */
   height: auto;
-  left: -1.85em;
+  left: -1.4em;
   top: -2.15em;
   margin: 0;
   pointer-events: none;
@@ -116,7 +123,7 @@ p {
 }
 
 .main-header h1 {
-  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-size: var(--header-title-size);
 }
 
 .main-header p {
