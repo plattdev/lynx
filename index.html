@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Recuperación del Lince Ibérico</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" rel="stylesheet" crossorigin="anonymous" />
   </head>
   <body>
     <header class="main-header">
@@ -85,6 +86,15 @@
       </section>
     </main>
 
+    <section class="map-section">
+      <h2 class="map-title">Distribución Geográfica en 2025</h2>
+      <p class="map-subtitle">
+        Número de linces ibéricos censados en 2025. El tamaño
+        de cada círculo es proporcional a la población.
+      </p>
+      <div id="map"></div>
+    </section>
+
     <footer class="main-footer">
       <p>
         Fuente de datos: MITECO – programas de conservación del lince ibérico en
@@ -103,6 +113,111 @@
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script>
+      // --- MAPA DE DISTRIBUCIÓN 2025 ---
+      const lynxGeoData = {
+        type: "FeatureCollection",
+        features: [
+          { properties: { name: "Sierra Morena Oriental (AND)", count: 613 }, geometry: { type: "Point", coordinates: [-3.50, 38.10] } },
+          { properties: { name: "Montes de Toledo",             count: 527 }, geometry: { type: "Point", coordinates: [-4.50, 39.50] } },
+          { properties: { name: "Vale do Guadiana (PT)",        count: 394 }, geometry: { type: "Point", coordinates: [-7.40, 37.60] } },
+          { properties: { name: "Sierra Morena Oriental (CLM)", count: 305 }, geometry: { type: "Point", coordinates: [-2.75, 38.40] } },
+          { properties: { name: "Matachel",                     count: 179 }, geometry: { type: "Point", coordinates: [-6.10, 38.70] } },
+          { properties: { name: "Doñana-Aljarafe",              count: 133 }, geometry: { type: "Point", coordinates: [-6.40, 37.10] } },
+          { properties: { name: "Sierra Morena Occidental",     count: 113 }, geometry: { type: "Point", coordinates: [-6.80, 37.90] } },
+          { properties: { name: "Campiña del Guadalquivir",     count:  44 }, geometry: { type: "Point", coordinates: [-4.80, 37.50] } },
+          { properties: { name: "Ortiga",                       count:  49 }, geometry: { type: "Point", coordinates: [-6.80, 39.00] } },
+          { properties: { name: "Valdecañas-Ibores",            count:  52 }, geometry: { type: "Point", coordinates: [-5.40, 39.80] } },
+          { properties: { name: "Áreas de conexión S. Morena",  count:  61 }, geometry: { type: "Point", coordinates: [-4.90, 37.85] } },
+          { properties: { name: "Sotillo",                      count:  13 }, geometry: { type: "Point", coordinates: [-6.60, 38.20] } },
+          { properties: { name: "Sierras Subbéticas",           count:  27 }, geometry: { type: "Point", coordinates: [-4.30, 37.40] } },
+          { properties: { name: "La Jara",                      count:  19 }, geometry: { type: "Point", coordinates: [-5.00, 39.70] } },
+          { properties: { name: "Lorca",                        count:  19 }, geometry: { type: "Point", coordinates: [-1.70, 37.68] } },
+          { properties: { name: "Campos de Hellín",             count:  20 }, geometry: { type: "Point", coordinates: [-1.65, 38.48] } },
+          { properties: { name: "Sierra del Relumbrar",         count:   2 }, geometry: { type: "Point", coordinates: [-2.45, 38.72] } },
+          { properties: { name: "Higueruela",                   count:   4 }, geometry: { type: "Point", coordinates: [-1.72, 39.02] } },
+          { properties: { name: "La Veguilla - Sª Jarameña",    count:   6 }, geometry: { type: "Point", coordinates: [-3.18, 38.88] } },
+          { properties: { name: "Valdecigüeñas",                count:   6 }, geometry: { type: "Point", coordinates: [-5.80, 39.12] } },
+          { properties: { name: "Monfragüe",                    count:   3 }, geometry: { type: "Point", coordinates: [-5.88, 39.82] } },
+          { properties: { name: "Urda",                         count:   2 }, geometry: { type: "Point", coordinates: [-3.72, 39.41] } },
+          { properties: { name: "Cabañeros",                    count:   2 }, geometry: { type: "Point", coordinates: [-4.42, 39.40] } },
+          { properties: { name: "Madrid",                       count:   1 }, geometry: { type: "Point", coordinates: [-3.70, 40.42] } },
+          { properties: { name: "Cerrato palentino",            count:  11 }, geometry: { type: "Point", coordinates: [-4.18, 42.36] } },
+        ].map(f => ({ ...f, type: "Feature" })),
+      };
+
+      const map = new maplibregl.Map({
+        container: "map",
+        style: "https://tiles.openfreemap.org/styles/positron",
+        center: [-5.2, 38.8],
+        zoom: 5.5,
+        attributionControl: true,
+      });
+
+      map.addControl(new maplibregl.NavigationControl(), "top-left");
+
+      map.on("load", () => {
+        map.addSource("lynx", { type: "geojson", data: lynxGeoData });
+
+        // Proportional circles (radius ~ sqrt of count)
+        map.addLayer({
+          id: "lynx-circles",
+          type: "circle",
+          source: "lynx",
+          paint: {
+            "circle-radius": [
+              "interpolate", ["linear"],
+              ["sqrt", ["get", "count"]],
+              1,  5,
+              25, 36,
+            ],
+            "circle-color": "#c0644a",
+            "circle-opacity": 0.72,
+            "circle-stroke-width": 1.5,
+            "circle-stroke-color": "#ffffff",
+          },
+        });
+
+        // Count label — only shown when circle is large enough
+        map.addLayer({
+          id: "lynx-labels",
+          type: "symbol",
+          source: "lynx",
+          filter: [">", ["get", "count"], 10],
+          layout: {
+            "text-field": ["to-string", ["get", "count"]],
+            "text-size": 11,
+            "text-font": ["Noto Sans Regular", "Open Sans Regular"],
+          },
+          paint: {
+            "text-color": "#ffffff",
+            "text-halo-color": "#9b3a22",
+            "text-halo-width": 0.5,
+          },
+        });
+
+        // Popup on click
+        let activePopup = null;
+
+        map.on("click", "lynx-circles", (e) => {
+          if (activePopup) activePopup.remove();
+          const { name, count } = e.features[0].properties;
+          const coords = e.features[0].geometry.coordinates.slice();
+          activePopup = new maplibregl.Popup({ closeButton: false })
+            .setLngLat(coords)
+            .setHTML(`<strong>${name}</strong><br>${count} linces (2025)`)
+            .addTo(map);
+        });
+
+        map.on("mouseenter", "lynx-circles", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+        map.on("mouseleave", "lynx-circles", () => {
+          map.getCanvas().style.cursor = "";
+        });
+      });
+    </script>
   </body>
 </html>
