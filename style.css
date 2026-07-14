@@ -1,170 +1,246 @@
 /* --- FUENTES (self-hosted, sin dependencias externas) --- */
 @font-face {
-    font-family: 'Source Sans 3';
-    font-style: normal;
-    font-weight: 200 900;
-    font-display: swap;
-    src: url('fonts/SourceSans3-Variable.woff2') format('woff2');
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("fonts/SourceSans3-Variable.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: 'Fraunces';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('fonts/Fraunces-Variable.woff2') format('woff2');
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/Fraunces-Variable.woff2") format("woff2");
 }
 
 /* --- CONFIGURACIÓN GENERAL --- */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
-    font-family: 'Source Sans 3', sans-serif;
-    margin: 0;
-    color: #333;
-    background-image: url('images/lince_fondo.jpg.webp');
-    background-size: cover; /* Para que la imagen cubra todo el fondo */
-    background-position: center center; /* Para que la imagen esté centrada */
-    background-attachment: fixed; /* la imagen no se mueve al hacer scroll */
+  font-family: "Source Sans 3", sans-serif;
+  margin: 0;
+  color: #333;
+  overflow-x: hidden;
+  background-image: url("images/lince_fondo.jpg.webp");
+  background-size: cover; /* Para que la imagen cubra todo el fondo */
+  background-position: center center; /* Para que la imagen esté centrada */
+  background-attachment: fixed; /* la imagen no se mueve al hacer scroll */
+}
+
+/* En móvil, "fixed" en el fondo puede dar problemas de rendimiento/scroll en iOS */
+@media (max-width: 700px) {
+  body {
+    background-attachment: scroll;
+  }
 }
 /* Esto crea una capa blanca semitransparente sobre la imagen */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); /* Blanco con 60% de opacidad - más transparente */
-    z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Blanco con 60% de opacidad - más transparente */
+  z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
 }
 
 h1 {
-    color: #0d5e17; /* Un color oscuro para el texto */
+  color: #0d5e17; /* Un color oscuro para el texto */
 }
 
-h1, h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-optical-sizing: auto;
+h1,
+h2 {
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-optical-sizing: auto;
 }
 
 p {
-    line-height: 1.6;
-    font-size: 1.1rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
-
 
 /* --- ESTRUCTURA Y CAPAS PRINCIPALES --- */
 /* Esta regla unificada asegura que todos los contenedores principales
    estén por encima del velo de fondo. */
-.main-header, .main-footer, #scrolly-container {
-    position: relative;
-    z-index: 1;
+.main-header,
+.main-footer,
+#scrolly-container {
+  position: relative;
+  z-index: 1;
 }
 
-
 /* --- CABECERA Y PIE DE PÁGINA --- */
-.main-header, .main-footer {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
+.main-header,
+.main-footer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
 }
 
 .main-header {
-    position: relative;
+  position: relative;
+}
+
+.brand-mark {
+  position: relative;
+  display: inline-block;
 }
 
 .lynx-illustration {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    width: 90px;
-    margin: 0;
-}
-
-.lynx-illustration img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-@media (max-width: 700px) {
-    .lynx-illustration {
-        width: 60px;
-    }
+  position: absolute;
+  width: 4em; /* escala junto al tamaño fluido del h1 */
+  height: auto;
+  left: -1.85em;
+  top: -2.15em;
+  margin: 0;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .main-header h1 {
-    font-size: 2.5rem;
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+}
+
+.main-header p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 /* --- ESTRUCTURA SCROLLYTELLING --- */
 #scrolly-container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .scroll-text {
-    width: 45%;
-    padding: 0 5%;
+  width: 45%;
+  padding: 0 5%;
 }
 
 .sticky-chart {
-    width: 55%;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 10vh; /* Centrado verticalmente */
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 55%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10vh; /* Centrado verticalmente */
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chart svg {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
 }
 
 .step {
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px 0;
-    opacity: 0.3;
-    transition: opacity 0.5s;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  opacity: 0.3;
+  transition: opacity 0.5s;
 }
 
 .step.is-active {
-    opacity: 1;
+  opacity: 1;
+}
+
+/* --- RESPONSIVE: apila el texto y el gráfico en pantallas estrechas --- */
+@media (max-width: 900px) {
+  #scrolly-container {
+    flex-direction: column;
+  }
+
+  .scroll-text,
+  .sticky-chart {
+    width: 100%;
+  }
+
+  .sticky-chart {
+    order: -1; /* el gráfico se ve primero y queda fijo mientras el texto scrollea debajo */
+    top: 0;
+    height: 45vh;
+    margin-bottom: 20px;
+  }
+
+  .step {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-text {
+    padding: 0 4%;
+  }
+
+  .sticky-chart {
+    height: 38vh;
+  }
+
+  .step {
+    min-height: 40vh;
+  }
+
+  .step h2 {
+    font-size: 1.3rem;
+  }
+
+  .step p {
+    font-size: 1rem;
+  }
 }
 
 /* --- ESTILOS DEL GRÁFICO (D3) --- */
 .bar {
-    fill: #4682B4; 
-    transition: fill 0.5s;
+  fill: #4682b4;
+  transition: fill 0.5s;
 }
 
 .bar.highlight {
-    fill: #2E8B57; 
+  fill: #2e8b57;
 }
 
 .bar-label {
-    text-anchor: middle; /* Centra el texto horizontalmente */
-    font-size: 1 rem;
-    font-weight: 700;
-    fill: #555; /* Un color de texto un poco más suave */
+  text-anchor: middle; /* Centra el texto horizontalmente */
+  font-size: 1 rem;
+  font-weight: 700;
+  fill: #555; /* Un color de texto un poco más suave */
 }
 
 .axis-label {
-    font-size: 1.1em; /* Aumentado de 0.9em a 1.1em */
-    fill: #555;
+  font-size: 1.1em; /* Aumentado de 0.9em a 1.1em */
+  fill: #555;
 }
 
 /* Separación específica para el título del eje Y */
 .y-axis-label {
-    font-size: 1.1em;
-    fill: #555;
-    /* Sin transform para evitar conflictos con la rotación */
+  font-size: 1.1em;
+  fill: #555;
+  /* Sin transform para evitar conflictos con la rotación */
 }
 
 .tick text {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.5em;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.5em;
 }
