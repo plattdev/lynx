@@ -1,3 +1,20 @@
+/* --- FUENTES (self-hosted, sin dependencias externas) --- */
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('fonts/SourceSans3-Variable.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('fonts/Fraunces-Variable.woff2') format('woff2');
+}
+
 /* --- CONFIGURACIÓN GENERAL --- */
 body {
     font-family: 'Source Sans 3', sans-serif;
@@ -25,7 +42,9 @@ h1 {
 }
 
 h1, h2 {
-    font-weight: 700;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-optical-sizing: auto;
 }
 
 p {
@@ -49,6 +68,30 @@ p {
     margin: 0 auto;
     padding: 40px 20px;
     text-align: center;
+}
+
+.main-header {
+    position: relative;
+}
+
+.lynx-illustration {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 90px;
+    margin: 0;
+}
+
+.lynx-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 700px) {
+    .lynx-illustration {
+        width: 60px;
+    }
 }
 
 .main-header h1 {
