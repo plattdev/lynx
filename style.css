@@ -95,35 +95,8 @@ p {
   text-align: center;
 }
 
-.main-header {
-  position: relative;
-  --header-title-size: clamp(1.6rem, 5vw, 2.5rem);
-  /* Espacio extra alrededor del título, calculado a partir de su tamaño,
-     para que la ilustración del lince nunca quede recortada por el
-     borde de la ventana (tablet y desktop incluidos). */
-  padding-top: calc(20px + 2.4 * var(--header-title-size));
-  padding-left: calc(20px + 1 * var(--header-title-size));
-  padding-right: calc(20px + 1 * var(--header-title-size));
-}
-
-.brand-mark {
-  position: relative;
-  display: inline-block;
-}
-
-.lynx-illustration {
-  position: absolute;
-  width: 4em; /* escala junto al tamaño fluido del h1 */
-  height: auto;
-  left: -1.4em;
-  top: -2.15em;
-  margin: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
 .main-header h1 {
-  font-size: var(--header-title-size);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
 }
 
 .main-header p {
@@ -146,11 +119,27 @@ p {
   width: 55%;
   position: -webkit-sticky;
   position: sticky;
-  top: 10vh; /* Centrado verticalmente */
+  top: 10vh;
   height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.lynx-illustration {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 90px;
+  height: auto;
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 #chart svg {
@@ -220,16 +209,16 @@ p {
 
 /* --- ESTILOS DEL GRÁFICO (D3) --- */
 .bar {
-  fill: #4682b4;
+  fill: #5b8fa8; /* azul acero apagado — España */
   transition: fill 0.5s;
 }
 
 .bar.highlight {
-  fill: #2e8b57;
+  fill: #4a8f6a; /* verde salvia — año destacado */
 }
 
 .bar-portugal {
-  fill: #9b2226; /* segmento apilado de Portugal, distinto del de España */
+  fill: #c0644a; /* terracota cálida — Portugal */
   transition: fill 0.5s;
 }
 

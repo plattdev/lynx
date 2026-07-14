@@ -1,5 +1,5 @@
 // --- 1. CONFIGURACIÓN INICIAL ---
-const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+const margin = { top: 50, right: 30, bottom: 50, left: 60 },
   width = 600 - margin.left - margin.right,
   height = 400 - margin.top - margin.bottom;
 
@@ -70,12 +70,12 @@ d3.csv("data.csv").then(function (data) {
     .text("Población estimada de linces");
 
   // --- LEYENDA (España / Portugal) ---
-  // Se coloca en la esquina superior izquierda para no chocar con las
-  // etiquetas de las barras más altas (las de los años recientes, a la derecha).
+  // Esquina superior derecha del SVG, dentro del área de barras,
+  // lejos del eje Y izquierdo.
   const legend = svg
     .append("g")
     .attr("class", "chart-legend")
-    .attr("transform", "translate(0, -14)");
+    .attr("transform", `translate(${width - 82}, ${-margin.top + 8})`);
 
   legend
     .append("rect")
