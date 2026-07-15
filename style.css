@@ -129,13 +129,13 @@ p {
 .chart-wrapper {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 #chart svg {
   width: 100%;
   height: auto;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .step {
@@ -218,39 +218,38 @@ p {
 
 .chart-legend text {
   font-family: "Source Sans 3", sans-serif;
-  font-size: 0.75em;
+  font-size: 1.1em;
   fill: #555;
 }
 
 .bar-label {
   text-anchor: middle; /* Centra el texto horizontalmente */
-  font-size: 1 rem;
+  font-size: 1.3em;
   font-weight: 700;
   fill: #555; /* Un color de texto un poco más suave */
 }
 
 .axis-label {
-  font-size: 1.1em; /* Aumentado de 0.9em a 1.1em */
+  font-size: 1.3em; /* Aumentado de 1.1em a 1.3em */
   fill: #555;
 }
 
 /* Separación específica para el título del eje Y */
 .y-axis-label {
-  font-size: 1.1em;
+  font-size: 1.3em;
   fill: #555;
   /* Sin transform para evitar conflictos con la rotación */
 }
 
 .tick text {
   font-family: "Source Sans 3", sans-serif;
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 /* --- SECCIÓN MAPA GEOGRÁFICO --- */
 .map-section {
-  max-width: 1100px;
-  margin: 60px auto;
-  padding: 0 20px;
+  width: 100%;
+  margin: 60px 0;
   position: relative;
   z-index: 1;
 }
@@ -262,6 +261,7 @@ p {
   font-size: clamp(1.4rem, 4vw, 2rem);
   color: #0d5e17;
   margin-bottom: 8px;
+  padding: 0 20px;
 }
 
 .map-subtitle {
@@ -269,12 +269,12 @@ p {
   max-width: 700px;
   margin: 0 auto 24px;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
+  padding: 0 20px;
 }
 
 #map {
   width: 100%;
   height: 560px;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }

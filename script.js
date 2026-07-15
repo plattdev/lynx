@@ -1,5 +1,5 @@
 // --- 1. CONFIGURACIÓN INICIAL ---
-const margin = { top: 50, right: 30, bottom: 50, left: 60 },
+const margin = { top: 50, right: 30, bottom: 50, left: 100 },
   width = 600 - margin.left - margin.right,
   height = 400 - margin.top - margin.bottom;
 
@@ -63,9 +63,9 @@ d3.csv("data.csv").then(function (data) {
     .append("text")
     .attr("class", "axis-label")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left) // Posición original sin separación adicional
+    .attr("y", 0 - margin.left) // Posición original
     .attr("x", 0 - height / 2)
-    .attr("dy", "0.65em") // mueve el texto un poco más allá de la línea del eje
+    .attr("dy", "1em") // mueve el texto hacia la derecha (hacia el eje)
     .style("text-anchor", "middle")
     .text("Población estimada de linces");
 
@@ -75,22 +75,32 @@ d3.csv("data.csv").then(function (data) {
   const legend = svg
     .append("g")
     .attr("class", "chart-legend")
-    .attr("transform", `translate(8, 8)`);
+    .attr("transform", `translate(16, 12)`);
 
   legend
     .append("rect")
-    .attr("width", 12)
-    .attr("height", 12)
+    .attr("width", 20)
+    .attr("height", 20)
     .attr("class", "bar");
-  legend.append("text").attr("x", 18).attr("y", 10).text("España");
+  legend
+    .append("text")
+    .attr("x", 28)
+    .attr("y", 10)
+    .style("alignment-baseline", "middle")
+    .text("España");
 
   legend
     .append("rect")
-    .attr("width", 12)
-    .attr("height", 12)
-    .attr("y", 18)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("y", 28)
     .attr("class", "bar-portugal");
-  legend.append("text").attr("x", 18).attr("y", 28).text("Portugal");
+  legend
+    .append("text")
+    .attr("x", 28)
+    .attr("y", 38)
+    .style("alignment-baseline", "middle")
+    .text("Portugal");
 
   // --- BARRAS (inicialmente invisibles) ---
   // Segmento inferior: España
