@@ -70,12 +70,12 @@ d3.csv("data.csv").then(function (data) {
     .text("Población estimada de linces");
 
   // --- LEYENDA (España / Portugal) ---
-  // Esquina superior derecha del SVG, dentro del área de barras,
-  // lejos del eje Y izquierdo.
+  // A la derecha del eje Y, dentro del área del gráfico,
+  // cerca de la esquina superior izquierda del área de barras.
   const legend = svg
     .append("g")
     .attr("class", "chart-legend")
-    .attr("transform", `translate(${width - 82}, ${-margin.top + 8})`);
+    .attr("transform", `translate(8, 8)`);
 
   legend
     .append("rect")

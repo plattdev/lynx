@@ -132,16 +132,6 @@ p {
   max-width: 600px;
 }
 
-.lynx-illustration {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 90px;
-  height: auto;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
 #chart svg {
   width: 100%;
   height: auto;
