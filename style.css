@@ -51,12 +51,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.7
-  ); /* Blanco con 60% de opacidad - más transparente */
+  background-color: rgba(255, 255, 255, 0.51); /* Blanco con 60% de opacidad - más transparente */
   z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
 }
 
