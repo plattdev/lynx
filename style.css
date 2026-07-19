@@ -268,14 +268,33 @@ p {
 }
 
 #map {
+  position: relative;
   width: 100%;
   height: 560px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Lynx illustration overlay inside the map */
+.map-lynx-overlay {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 200px;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none; /* no bloquea clics ni interacciones del mapa */
+  z-index: 2;
+}
+
 @media (max-width: 700px) {
   #map {
     height: 420px;
+  }
+
+  .map-lynx-overlay {
+    width: 100px;
+    bottom: 8px;
+    right: 8px;
   }
 }
