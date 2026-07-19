@@ -56,11 +56,12 @@ d3.csv("data.csv").then(function (data) {
     .call(d3.axisBottom(x))
     .selectAll("text");
 
-  svg.append("g").call(d3.axisLeft(y));
+  svg.append("g").call(d3.axisLeft(y).ticks(5));
 
   // Añadir etiqueta al eje Y
   svg
     .append("text")
+    .attr("id", "y-axis-label")
     .attr("class", "axis-label")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left) // Posición original
@@ -84,6 +85,7 @@ d3.csv("data.csv").then(function (data) {
     .attr("class", "bar");
   legend
     .append("text")
+    .attr("id", "legend-es")
     .attr("x", 28)
     .attr("y", 10)
     .style("alignment-baseline", "middle")
@@ -97,10 +99,12 @@ d3.csv("data.csv").then(function (data) {
     .attr("class", "bar-portugal");
   legend
     .append("text")
+    .attr("id", "legend-pt")
     .attr("x", 28)
     .attr("y", 38)
     .style("alignment-baseline", "middle")
     .text("Portugal");
+
 
   // --- BARRAS (inicialmente invisibles) ---
   // Segmento inferior: España
@@ -237,4 +241,39 @@ d3.csv("data.csv").then(function (data) {
 
   // Disparar la primera actualización manualmente
   updateChart(-1);
+});
+
+// --- i18n ---
+function setLanguage(lang) {
+  localStorage.setItem('lang', lang);
+  
+  // Update HTML text content with data-i18n attributes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Update D3 chart labels
+  const yLabel = document.getElementById("y-axis-label");
+  if (yLabel) yLabel.textContent = translations[lang].chart_y_label;
+
+  const legendEs = document.getElementById("legend-es");
+  if (legendEs) legendEs.textContent = translations[lang].legend_es;
+
+  const legendPt = document.getElementById("legend-pt");
+  if (legendPt) legendPt.textContent = translations[lang].legend_pt;
+
+  // Toggle active button class
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById(`btn-${lang}`).classList.add('active');
+}
+
+// On initial load, set the language based on previous preference or default to Spanish
+document.addEventListener("DOMContentLoaded", () => {
+  const currentLang = localStorage.getItem('lang') || 'es';
+  setLanguage(currentLang);
 });
