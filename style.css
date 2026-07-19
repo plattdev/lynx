@@ -31,18 +31,23 @@ body {
   margin: 0;
   color: #333;
   overflow-x: hidden;
-  background-image: url("images/lince_fondo.jpg.webp");
-  background-size: cover; /* Para que la imagen cubra todo el fondo */
-  background-position: center center; /* Para que la imagen esté centrada */
-  background-attachment: fixed; /* la imagen no se mueve al hacer scroll */
+  /* El fondo se ha movido a body::after para solucionar un bug de zoom excesivo en iOS/móviles */
 }
 
-/* En móvil, "fixed" en el fondo puede dar problemas de rendimiento/scroll en iOS */
-@media (max-width: 700px) {
-  body {
-    background-attachment: scroll;
-  }
+/* Pseudo-elemento para la imagen de fondo (fijo en pantalla y evita el super zoom en móviles) */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Se asegura de medir solo la pantalla, no todo el documento */
+  background-image: url("images/lince_fondo.jpg.webp");
+  background-size: cover;
+  background-position: 35% center; /* Movido hacia la derecha reduciendo el porcentaje X */
+  z-index: -2;
 }
+
 /* Esto crea una capa blanca semitransparente sobre la imagen */
 body::before {
   content: "";
@@ -51,7 +56,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.51); /* Blanco con 60% de opacidad - más transparente */
+  background-color: rgba(255, 255, 255, 0.51); /* Blanco con 60% opacidad */
   z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
 }
 
@@ -314,8 +319,9 @@ p {
 .map-lynx-overlay {
   position: absolute;
   bottom: 12px;
-  right: 1500px;
+  left: 20px; /* changed from right: 1500px to stick to the left edge safely */
   width: 200px;
+  max-width: 30%; /* ensure it doesn't take over small screens */
   height: auto;
   opacity: 0.9;
   pointer-events: none; /* no bloquea clics ni interacciones del mapa */
@@ -330,6 +336,6 @@ p {
   .map-lynx-overlay {
     width: 100px;
     bottom: 8px;
-    right: 8px;
+    left: 8px;
   }
 }
