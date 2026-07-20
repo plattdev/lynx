@@ -70,6 +70,16 @@ d3.csv("data.csv").then(function (data) {
     .style("text-anchor", "middle")
     .text("Población estimada de linces");
 
+  // Añadir etiqueta al eje X
+  svg
+    .append("text")
+    .attr("id", "x-axis-label")
+    .attr("class", "axis-label")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom - 5)
+    .style("text-anchor", "middle")
+    .text("Año");
+
   // --- LEYENDA (España / Portugal) ---
   // A la derecha del eje Y, dentro del área del gráfico,
   // cerca de la esquina superior izquierda del área de barras.
@@ -241,6 +251,11 @@ d3.csv("data.csv").then(function (data) {
 
   // Disparar la primera actualización manualmente
   updateChart(-1);
+
+  // Re-apply translation after chart is built (setLanguage may have
+  // fired before the async D3 chart was ready)
+  const currentLang = localStorage.getItem('lang') || 'es';
+  setLanguage(currentLang);
 });
 
 // --- i18n ---
@@ -256,6 +271,9 @@ function setLanguage(lang) {
   });
 
   // Update D3 chart labels
+  const xLabel = document.getElementById("x-axis-label");
+  if (xLabel) xLabel.textContent = translations[lang].chart_x_label;
+
   const yLabel = document.getElementById("y-axis-label");
   if (yLabel) yLabel.textContent = translations[lang].chart_y_label;
 

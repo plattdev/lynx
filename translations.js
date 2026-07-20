@@ -17,6 +17,7 @@ const translations = {
     "footer_source": "Fuente de datos: MITECO – programas de conservación del lince ibérico en España y Portugal.",
     "footer_photo": "Fotografía de fondo:",
     "popup_lynx": "linces",
+    "chart_x_label": "Año",
     "chart_y_label": "Población estimada de linces",
     "legend_es": "España",
     "legend_pt": "Portugal"
@@ -39,6 +40,7 @@ const translations = {
     "footer_source": "Data source: MITECO – Iberian lynx conservation programs in Spain and Portugal.",
     "footer_photo": "Background photograph:",
     "popup_lynx": "lynxes",
+    "chart_x_label": "Year",
     "chart_y_label": "Estimated lynx population",
     "legend_es": "Spain",
     "legend_pt": "Portugal"
