@@ -1,0 +1,345 @@
+/* IMPORTS */
+@import "reset.css";
+@import "normalize.css";
+
+/* --- FUENTES (self-hosted, sin dependencias externas) --- */
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("../fonts/SourceSans3-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/Fraunces-Variable.woff2") format("woff2");
+}
+
+/* --- CONFIGURACIÓN GENERAL --- */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  margin: 0;
+  color: #333;
+  overflow-x: hidden;
+  /* El fondo se ha movido a body::after para solucionar un bug de zoom excesivo en iOS/móviles */
+}
+
+/* Pseudo-elemento para la imagen de fondo (fijo en pantalla y evita el super zoom en móviles) */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Se asegura de medir solo la pantalla, no todo el documento */
+  background-image: url("../images/lince_fondo.jpg.webp");
+  background-size: cover;
+  background-position: 35% center; /* Movido hacia la derecha reduciendo el porcentaje X */
+  z-index: -2;
+}
+
+/* Esto crea una capa blanca semitransparente sobre la imagen */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.51); /* Blanco con 60% opacidad */
+  z-index: -1; /* Coloca el velo detrás del contenido pero encima de la imagen de fondo */
+}
+
+/* --- I18N LANGUAGE SELECTOR --- */
+.lang-selector {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.95rem;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.lang-btn:hover {
+  color: #0d5e17;
+}
+
+.lang-btn.active {
+  color: #0d5e17;
+  font-weight: 700;
+  border-bottom: 2px solid #0d5e17;
+}
+
+.lang-separator {
+  color: #aaa;
+  margin: 0 0.4rem;
+}
+
+h1 {
+  color: #0d5e17; /* Un color oscuro para el texto */
+}
+
+h1,
+h2 {
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-optical-sizing: auto;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* --- ESTRUCTURA Y CAPAS PRINCIPALES --- */
+/* Esta regla unificada asegura que todos los contenedores principales
+   estén por encima del velo de fondo. */
+.main-header,
+.main-footer,
+#scrolly-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- CABECERA Y PIE DE PÁGINA --- */
+.main-header,
+.main-footer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.main-header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+}
+
+.main-header p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+}
+
+/* --- ESTRUCTURA SCROLLYTELLING --- */
+#scrolly-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.scroll-text {
+  width: 45%;
+  padding: 0 5%;
+}
+
+.sticky-chart {
+  width: 55%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10vh;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+}
+
+#chart svg {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+}
+
+.step {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  opacity: 0.3;
+  transition: opacity 0.5s;
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+/* --- RESPONSIVE: apila el texto y el gráfico en pantallas estrechas --- */
+@media (max-width: 900px) {
+  #scrolly-container {
+    flex-direction: column;
+  }
+
+  .scroll-text,
+  .sticky-chart {
+    width: 100%;
+  }
+
+  .sticky-chart {
+    order: -1; /* el gráfico se ve primero y queda fijo mientras el texto scrollea debajo */
+    top: 0;
+    height: 45vh;
+    margin-bottom: 20px;
+  }
+
+  .step {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-text {
+    padding: 0 4%;
+  }
+
+  .sticky-chart {
+    height: 38vh;
+  }
+
+  .step {
+    min-height: 40vh;
+  }
+
+  .step h2 {
+    font-size: 1.3rem;
+  }
+
+  .step p {
+    font-size: 1rem;
+  }
+}
+
+/* --- ESTILOS DEL GRÁFICO (D3) --- */
+.bar {
+  fill: #5b8fa8; /* azul acero apagado — España */
+  transition: fill 0.5s;
+}
+
+.bar.highlight {
+  fill: #4a8f6a; /* verde salvia — año destacado */
+}
+
+.bar-portugal {
+  fill: #c0644a; /* terracota cálida — Portugal */
+  transition: fill 0.5s;
+}
+
+.chart-legend rect {
+  stroke: none;
+}
+
+.chart-legend text {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.1em;
+  fill: #555;
+}
+
+.bar-label {
+  text-anchor: middle; /* Centra el texto horizontalmente */
+  font-size: 1.3em;
+  font-weight: 700;
+  fill: #555; /* Un color de texto un poco más suave */
+}
+
+.axis-label {
+  font-size: 1.3em; /* Aumentado de 1.1em a 1.3em */
+  fill: #555;
+}
+
+/* Separación específica para el título del eje Y */
+.y-axis-label {
+  font-size: 1.3em;
+  fill: #555;
+  /* Sin transform para evitar conflictos con la rotación */
+}
+
+.tick text {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.8em;
+}
+
+/* --- SECCIÓN MAPA GEOGRÁFICO --- */
+.map-section {
+  width: 100%;
+  margin: 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.map-title {
+  text-align: center;
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: #0d5e17;
+  margin-bottom: 8px;
+  padding: 0 20px;
+}
+
+.map-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 24px;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  padding: 0 20px;
+}
+
+#map {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Lynx illustration overlay inside the map */
+.map-lynx-overlay {
+  position: absolute;
+  bottom: 12px;
+  left: 20px; /* changed from right: 1500px to stick to the left edge safely */
+  width: 200px;
+  max-width: 30%; /* ensure it doesn't take over small screens */
+  height: auto;
+  opacity: 0.75;
+  pointer-events: none; /* no bloquea clics ni interacciones del mapa */
+  z-index: 2;
+}
+
+@media (max-width: 700px) {
+  #map {
+    height: 420px;
+  }
+
+  .map-lynx-overlay {
+    width: 100px;
+    bottom: 8px;
+    left: 8px;
+  }
+}
