@@ -15,12 +15,18 @@ const translations = {
     "map_title": "Distribución Geográfica en 2025",
     "map_subtitle": "Número de linces ibéricos censados en 2025. El tamaño de cada círculo es proporcional a la población.",
     "footer_source": "Fuente de datos: MITECO – programas de conservación del lince ibérico en España y Portugal.",
-    "footer_photo": "Fotografía de fondo:",
+    "footer_photo": "Fotografía:",
     "popup_lynx": "linces",
     "chart_x_label": "Año",
     "chart_y_label": "Población estimada de linces",
     "legend_es": "España",
-    "legend_pt": "Portugal"
+    "legend_pt": "Portugal",
+    "banner_title": "Evolución y Aislamiento",
+    "banner_text": "El lince ibérico (<em>Lynx pardinus</em>) es una especie única cuya historia evolutiva está marcada por el aislamiento geográfico. Durante el Pleistoceno, las glaciaciones forzaron a las poblaciones de felinos a buscar refugio en el sur de Europa. El aislamiento en la Península Ibérica provocó su divergencia del linaje del lince boreal (<em>Lynx lynx</em>) hace aproximadamente 1 millón de años (Johnson et al., 2006). Este aislamiento prolongado y las sucesivas reducciones demográficas modelaron su genoma, dejándolo vulnerable (Abascal et al., 2015), pero lo convirtieron en un tesoro exclusivo de nuestros ecosistemas.",
+    "references_title": "Referencias Científicas",
+    "ref_1": "Abascal, F., Corvelo, A., Cruz, F., et al. (2015). Extreme genomic erosion after recurrent demographic bottlenecks in the highly endangered Iberian lynx. <em>Genome Biology</em>, 16(1), 251.",
+    "ref_2": "Johnson, W. E., Eizirik, E., Pecon-Slattery, J., et al. (2006). The Late Miocene radiation of modern Felidae: A genetic assessment. <em>Science</em>, 311(5757), 73-77.",
+    "ref_3": "Rodríguez, A., & Delibes, M. (1992). Current range and status of the Iberian lynx <em>Lynx pardinus</em>. <em>Biological Conservation</em>, 61(3), 189-196."
   },
   en: {
     "title": "The Iberian Lynx Recovery",
@@ -38,11 +44,17 @@ const translations = {
     "map_title": "Geographical Distribution in 2025",
     "map_subtitle": "Number of Iberian lynxes censused in 2025. The size of each circle is proportional to the population.",
     "footer_source": "Data source: MITECO – Iberian lynx conservation programs in Spain and Portugal.",
-    "footer_photo": "Background photograph:",
+    "footer_photo": "Photograph:",
     "popup_lynx": "lynxes",
     "chart_x_label": "Year",
     "chart_y_label": "Estimated lynx population",
     "legend_es": "Spain",
-    "legend_pt": "Portugal"
+    "legend_pt": "Portugal",
+    "banner_title": "Evolution and Isolation",
+    "banner_text": "The Iberian lynx (<em>Lynx pardinus</em>) is a unique species whose evolutionary history is marked by geographic isolation. During the Pleistocene glaciations, feline populations were forced to seek refuge in southern Europe. Isolation in the Iberian Peninsula led to its divergence from the Eurasian lynx lineage (<em>Lynx lynx</em>) approximately 1 million years ago (Johnson et al., 2006). This prolonged isolation and successive demographic bottlenecks shaped its genome, leaving it vulnerable (Abascal et al., 2015), but making it an exclusive treasure of our ecosystems.",
+    "references_title": "Scientific References",
+    "ref_1": "Abascal, F., Corvelo, A., Cruz, F., et al. (2015). Extreme genomic erosion after recurrent demographic bottlenecks in the highly endangered Iberian lynx. <em>Genome Biology</em>, 16(1), 251.",
+    "ref_2": "Johnson, W. E., Eizirik, E., Pecon-Slattery, J., et al. (2006). The Late Miocene radiation of modern Felidae: A genetic assessment. <em>Science</em>, 311(5757), 73-77.",
+    "ref_3": "Rodríguez, A., & Delibes, M. (1992). Current range and status of the Iberian lynx <em>Lynx pardinus</em>. <em>Biological Conservation</em>, 61(3), 189-196."
   }
 };
