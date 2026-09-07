@@ -241,13 +241,20 @@ d3.csv("data.csv").then(function (data) {
   }
 
   // Configurar Scrollama
+  const isMobile = window.innerWidth <= 900;
   scroller
     .setup({
       step: ".scroll-text .step",
-      offset: 0.6, // Se activa cuando el paso supera el 60% de la pantalla
+      offset: isMobile ? 0.9 : 0.6, // Se activa antes en móvil para que el texto desaparezca antes de tocar el gráfico
       debug: false, // Ponlo en true para ver las líneas de activación
     })
     .onStepEnter(handleStepEnter);
+
+  // Actualizar offset si cambia el tamaño de la ventana
+  window.addEventListener("resize", () => {
+    const mobile = window.innerWidth <= 900;
+    scroller.offset(mobile ? 0.9 : 0.6);
+  });
 
   // Disparar la primera actualización manualmente
   updateChart(-1);
