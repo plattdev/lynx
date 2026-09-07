@@ -221,6 +221,20 @@ main {
     width: 100%;
   }
 
+  .scroll-text {
+    /* Magia CSS: el margen negativo hace que el contenedor termine exactamente 
+       cuando el Paso 5 se activa. Así la gráfica se "despega" y sube junto con 
+       el texto sin solaparse jamás. Ahí acaba la animación. */
+    margin-bottom: -52vh;
+  }
+
+  main {
+    /* Al hacer el #scrolly-container más corto, el main también se acortaba perdiendo 
+       su fondo verde oscuro. Añadimos padding al main para recuperar ese espacio visual,
+       de modo que el Paso 5 flote sobre el verde y empuje al mapa hacia abajo naturalmente. */
+    padding-bottom: 52vh;
+  }
+
   .sticky-chart {
     order: -1; /* el gráfico se ve primero y queda fijo mientras el texto scrollea debajo */
     top: 0;
@@ -229,7 +243,14 @@ main {
   }
 
   .step {
-    min-height: 50vh;
+    min-height: 100vh; /* Ocupa toda la pantalla */
+    justify-content: flex-end; /* Empuja el texto hacia abajo (fuera de la gráfica) */
+    padding-bottom: 10vh; /* Margen inferior */
+    opacity: 0; /* Minimalista: desaparece cuando no está activo */
+  }
+  
+  .step.is-active {
+    opacity: 1;
   }
 }
 
@@ -242,9 +263,7 @@ main {
     height: 38vh;
   }
 
-  .step {
-    min-height: 40vh;
-  }
+  /* Eliminado override de min-height para que herede el 100vh de 900px */
 
   .step h2 {
     font-size: 1.3rem;
