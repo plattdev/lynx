@@ -56,24 +56,26 @@ body {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  color: #555;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
   transition: color 0.2s ease, border-color 0.2s ease;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .lang-btn:hover {
-  color: #0d5e17;
+  color: #fff;
 }
 
 .lang-btn.active {
-  color: #0d5e17;
+  color: #fff;
   font-weight: 700;
-  border-bottom: 2px solid #0d5e17;
+  border-bottom: 2px solid #fff;
 }
 
 .lang-separator {
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.4);
   margin: 0 0.4rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 h1 {
@@ -97,24 +99,14 @@ p {
 /* --- ESTRUCTURA Y CAPAS PRINCIPALES --- */
 /* Esta regla unificada asegura que todos los contenedores principales
    estén por encima del velo de fondo. */
-.main-header,
+.hero-section,
 .main-footer,
 #scrolly-container {
   position: relative;
   z-index: 1;
 }
 
-/* --- CABECERA Y PIE DE PÁGINA --- */
-.main-header {
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 20px 20px;
-  text-align: center;
-  z-index: 10;
-  background-color: #f8f5ee;
-}
-
+/* --- PIE DE PÁGINA --- */
 .main-footer {
   max-width: 1000px;
   margin: 0 auto;
@@ -122,20 +114,16 @@ p {
   text-align: center;
 }
 
-.main-header h1 {
-  font-size: clamp(1.6rem, 5vw, 2.5rem);
-  color: #0d5e17;
-  margin-bottom: 10px;
-}
-
-.main-header p {
-  font-size: clamp(1.15rem, 3vw, 1.35rem);
-  color: #333;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
 /* --- ESTRUCTURA SCROLLYTELLING --- */
+main {
+  /* Difuminado suave desde el crema del fondo a un verde salvia, y vuelta al crema para transición limpia al mapa */
+  background: linear-gradient(180deg, #f8f5ee 0%, #e6f0e5 20%, #d6ead5 50%, #e6f0e5 80%, #f8f5ee 100%);
+  padding-top: 40px;
+  padding-bottom: 80px;
+  position: relative;
+  z-index: 1;
+}
+
 #scrolly-container {
   display: flex;
   max-width: 1200px;
@@ -182,6 +170,15 @@ p {
 
 .step.is-active {
   opacity: 1;
+}
+
+.step h2 {
+  margin-bottom: 24px;
+}
+
+.step p {
+  font-size: 1.3rem;
+  line-height: 1.6;
 }
 
 /* --- RESPONSIVE: apila el texto y el gráfico en pantallas estrechas --- */
@@ -300,7 +297,7 @@ p {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 24px;
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
   padding: 0 20px;
 }
 
@@ -337,54 +334,75 @@ p {
   }
 }
 
-/* --- SECCIÓN BANNER --- */
-.banner-section {
+/* --- HERO SECTION (HEADER + BANNER) --- */
+.hero-section {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 180px);
+  min-height: 100vh;
+  background-color: #0d2210;
   background-image: url("../images/lince_fondo.jpg.webp");
   background-size: cover;
-  background-position: right 85%;
+  background-position: right -10vw center;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 180px 10% 80px;
+  padding: 80px 8% 60px;
   margin-bottom: 40px;
   color: #fff;
   text-align: left;
+  overflow: hidden;
 }
 
-.banner-section::before {
+.hero-section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(13, 34, 16, 0.7); /* Dark green overlay */
+  /* Gradient that fades to transparent on the right, keeping the lynx visible */
+  background: linear-gradient(to right, rgba(13, 34, 16, 0.95) 0%, rgba(13, 34, 16, 0.85) 45%, rgba(13, 34, 16, 0) 75%);
   z-index: 1;
 }
 
-.banner-content {
+.hero-content {
   position: relative;
   z-index: 2;
   max-width: 55%;
-  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.banner-content h2 {
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   color: #fff;
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  margin-bottom: 24px;
-  margin-top: 0;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-.banner-content p {
-  font-size: clamp(1.3rem, 3vw, 1.55rem);
+.hero-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: #e6f0e5;
+  margin: 0;
+  font-weight: 300;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+.hero-intro h2 {
+  color: #a8d5b1;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin: 0 0 1rem 0;
+}
+
+.hero-intro p {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  margin-top: 20px;
+  color: #f8f5ee;
+  margin: 0;
   column-count: 2;
-  column-gap: 40px;
+  column-gap: 30px;
 }
 
 /* --- REFERENCIAS --- */
@@ -446,17 +464,27 @@ p {
   }
 }
 
-@media (max-width: 768px) {
-  .banner-section {
-    background-position: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 5%;
+@media (max-width: 900px) {
+  .hero-section::before {
+    /* More opaque on smaller screens so text is readable over the image */
+    background: linear-gradient(to bottom, rgba(13, 34, 16, 0.8) 0%, rgba(13, 34, 16, 0.95) 100%);
   }
-  .banner-content {
+  .hero-content {
     max-width: 100%;
+    margin-top: 40px;
   }
-  .banner-content p {
+  .hero-section {
+    background-position: center;
+    align-items: center;
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .hero-intro p {
     column-count: 1;
   }
 }

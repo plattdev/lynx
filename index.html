@@ -8,31 +8,31 @@
     <link href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" rel="stylesheet" crossorigin="anonymous" />
   </head>
   <body>
-    <header class="main-header">
+    <header class="hero-section">
       <div class="lang-selector">
         <button id="btn-es" class="lang-btn active" onclick="setLanguage('es')">ES</button>
         <span class="lang-separator">|</span>
         <button id="btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
       </div>
-      <h1 data-i18n="title">La Recuperación del Lince Ibérico</h1>
-      <p data-i18n="subtitle">Un viaje visual a través de los datos que salvaron al felino más amenazado del planeta. Haz scroll para descubrir la historia.</p>
       
-
-    </header>
-
-    <section class="banner-section">
-      <div class="banner-content">
-        <h2 data-i18n="banner_title">Evolución y Aislamiento</h2>
-        <p data-i18n="banner_text">
-          El lince ibérico (<em>Lynx pardinus</em>) es una especie única cuya historia evolutiva está marcada por el aislamiento geográfico. Durante el Pleistoceno (2,59 millones – 11 700 años), las glaciaciones provocaron que las poblaciones de felinos buscasen refugio en el sur de Europa. El aislamiento en la Península Ibérica provocó su divergencia del linaje del lince boreal (<em>Lynx lynx</em>) hace aproximadamente 1 millón de años (Johnson et al., 2006). Este aislamiento prolongado y las sucesivas reducciones demográficas modelaron su genoma, dejándolo vulnerable (Abascal et al., 2015), pero lo convirtieron en un tesoro exclusivo de los ecosistemas ibéricos.
-        </p>
+      <div class="hero-content">
+        <h1 data-i18n="title">La Recuperación del Lince Ibérico</h1>
+        <p class="hero-subtitle" data-i18n="subtitle">Un viaje visual a través de los datos que salvaron al felino más amenazado del planeta. Haz scroll para descubrir la historia.</p>
+        
+        <div class="hero-intro">
+          <h2 data-i18n="banner_title">Evolución y Aislamiento</h2>
+          <p data-i18n="banner_text">
+            El lince ibérico (<em>Lynx pardinus</em>) es una especie única cuya historia evolutiva está marcada por el aislamiento geográfico. Durante el Pleistoceno (2,59 millones – 11 700 años), las glaciaciones provocaron que las poblaciones de felinos buscasen refugio en el sur de Europa. El aislamiento en la Península Ibérica provocó su divergencia del linaje del lince boreal (<em>Lynx lynx</em>) hace aproximadamente 1 millón de años (Johnson et al., 2006). Este aislamiento prolongado y las sucesivas reducciones demográficas modelaron su genoma, dejándolo vulnerable (Abascal et al., 2015), pero lo convirtieron en un tesoro exclusivo de los ecosistemas ibéricos.
+          </p>
+        </div>
       </div>
+
       <div class="scroll-indicator">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
-    </section>
+    </header>
 
     <main>
       <section id="scrolly-container">
@@ -102,11 +102,6 @@
         de cada círculo es proporcional a la población.
       </p>
       <div id="map">
-        <img
-          src="images/lynxDraw.svg"
-          alt="Ilustración de lince ibérico"
-          class="map-lynx-overlay"
-        />
       </div>
     </section>
 
@@ -116,6 +111,9 @@
         <li data-i18n="ref_1">Abascal, F., Corvelo, A., Cruz, F., et al. (2015). Extreme genomic erosion after recurrent demographic bottlenecks in the highly endangered Iberian lynx. <em>Genome Biology</em>, 16(1), 251.</li>
         <li data-i18n="ref_2">Johnson, W. E., Eizirik, E., Pecon-Slattery, J., et al. (2006). The Late Miocene radiation of modern Felidae: A genetic assessment. <em>Science</em>, 311(5757), 73-77.</li>
         <li data-i18n="ref_3">Rodríguez, A., & Delibes, M. (1992). Current range and status of the Iberian lynx <em>Lynx pardinus</em>. <em>Biological Conservation</em>, 61(3), 189-196.</li>
+        <li data-i18n="ref_4"></li>
+        <li data-i18n="ref_5"></li>
+        <li data-i18n="ref_6"></li>
       </ul>
     </section>
 
