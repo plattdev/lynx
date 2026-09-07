@@ -11,7 +11,7 @@ const translations = {
     "step4_title": "Paso 4: España, el Gran Refugio",
     "step4_text": "España concentra la mayor parte de la población ibérica, distribuida principalmente por Castilla-La Mancha, Andalucía, Extremadura y nuevas zonas de reintroducción como Murcia, Castilla y León y Madrid. En 2024, la población española alcanzó los <strong>2.047 ejemplares</strong>. Los modelos científicos actuales recalcan la importancia de crear corredores ecológicos que conecten estas metapoblaciones, permitiendo la dispersión natural y amortiguando el impacto del cambio climático.",
     "step5_title": "Paso 5: Un Éxito Ibérico Compartido",
-    "step5_text": "Al otro lado de la frontera, la población lusa se concentra en el <strong>Valle del Guadiana</strong> y ya suma <strong>394 linces</strong> en 2025. Sumando ambos países, la población total del lince ibérico alcanzó en 2025 un récord histórico de <strong>2.663 ejemplares</strong>, con 542 hembras reproductoras y 952 cachorros nacidos ese año. El lince ibérico ha dejado de estar al borde de la extinción para convertirse en un símbolo de esperanza transfronteriza, logrando que en 2024 la UICN recatalogase a la especie de 'En Peligro' a 'Vulnerable'.",
+    "step5_text": "Al otro lado de la frontera, la población lusa se concentra en el <strong>Valle del Guadiana</strong> y ya suma <strong>394 linces</strong> en 2025. Sumando ambos países, la población total del lince ibérico alcanzó en 2025 un récord histórico de <strong>2.663 ejemplares</strong>, con 542 hembras reproductoras y 952 cachorros nacidos ese año. El lince ibérico ha dejado de estar al borde de la extinción para convertirse en un símbolo de esperanza transfronteriza, logrando que en 2024 la UICN recatalogase a la especie de 'En Peligro' a '<span class=\\'status-vulnerable\\'>Vulnerable</span>'.",
     "map_title": "Distribución Geográfica en 2025",
     "map_subtitle": "Número de linces ibéricos censados en 2025. El tamaño de cada círculo es proporcional a la población.",
     "footer_source": "Fuente de datos: MITECO – programas de conservación del lince ibérico en España y Portugal.",
@@ -23,13 +23,15 @@ const translations = {
     "legend_pt": "Portugal",
     "banner_title": "Evolución y Aislamiento",
     "banner_text": "El lince ibérico (<em>Lynx pardinus</em>) es una especie única cuya historia evolutiva está marcada por el aislamiento geográfico, y que a principios del siglo XXI fue catalogada por la UICN (2002) como el felino más amenazado del planeta en 'Peligro Crítico' de extinción. Durante el Pleistoceno, las glaciaciones forzaron a las poblaciones de felinos a buscar refugio en el sur de Europa. El aislamiento en la Península Ibérica provocó su divergencia del linaje del lince boreal (<em>Lynx lynx</em>) hace aproximadamente 1 millón de años (Johnson et al., 2006). Este aislamiento prolongado y las sucesivas reducciones demográficas modelaron su genoma, dejándolo vulnerable (Abascal et al., 2015). Recientemente, investigaciones en <em>Nature Geoscience</em> (2022) basadas en registros históricos han revelado que su área de distribución en el pasado era mucho más amplia de lo que se creía. Esto subraya que la actual recuperación de la población es, en realidad, una estabilización vital tras una contracción dramática, convirtiendo a este felino en un auténtico superviviente y un tesoro exclusivo de los ecosistemas ibéricos.",
-    "references_title": "Referencias Científicas",
+    "references_title": "Referencias",
     "ref_1": "Abascal, F., Corvelo, A., Cruz, F., et al. (2015). Extreme genomic erosion after recurrent demographic bottlenecks in the highly endangered Iberian lynx. <em>Genome Biology</em>, 16(1), 251.",
     "ref_2": "Johnson, W. E., Eizirik, E., Pecon-Slattery, J., et al. (2006). The Late Miocene radiation of modern Felidae: A genetic assessment. <em>Science</em>, 311(5757), 73-77.",
     "ref_3": "Rodríguez, A., & Delibes, M. (1992). Current range and status of the Iberian lynx <em>Lynx pardinus</em>. <em>Biological Conservation</em>, 61(3), 189-196.",
     "ref_4": "Delibes, M., Rodríguez, A., & Ferreras, P. (2000). Action Plan for the Conservation of the Iberian Lynx in Europe. <em>Council of Europe Publishing</em>.",
     "ref_5": "Simón, M. A., et al. (2012). Ten years conserving the Iberian lynx. <em>Consejería de Agricultura, Pesca y Medio Ambiente, Junta de Andalucía</em>.",
-    "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906."
+    "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906.",
+    "ref_7": "UICN (2002). <em>Lynx pardinus</em>. The IUCN Red List of Threatened Species 2002. En Peligro Crítico (CR).",
+    "footer_copyright": "&copy; 2026 plaTTdata. Todos los derechos reservados."
   },
   en: {
     "title": "The Iberian Lynx Recovery",
@@ -43,7 +45,7 @@ const translations = {
     "step4_title": "Step 4: Spain, the Great Refuge",
     "step4_text": "Spain holds the vast majority of the Iberian population, distributed mainly across Castilla-La Mancha, Andalusia, Extremadura, and new reintroduction areas like Murcia, Castilla y León, and Madrid. In 2024, the Spanish population reached <strong>2,047 individuals</strong>. Current scientific models emphasize the importance of creating ecological corridors to connect these metapopulations, allowing for natural dispersal and buffering against climate change impacts.",
     "step5_title": "Step 5: A Shared Iberian Success",
-    "step5_text": "Across the border, the Portuguese population is concentrated in the <strong>Guadiana Valley</strong> and already numbers <strong>394 lynxes</strong> in 2025. Combining both countries, the total Iberian lynx population reached a historic record of <strong>2,663 individuals</strong> in 2025, with 542 breeding females and 952 cubs born that year. The Iberian lynx has stepped back from the brink of extinction to become a symbol of cross-border hope, successfully leading the IUCN to downlist the species from 'Endangered' to 'Vulnerable' in 2024.",
+    "step5_text": "Across the border, the Portuguese population is concentrated in the <strong>Guadiana Valley</strong> and already numbers <strong>394 lynxes</strong> in 2025. Combining both countries, the total Iberian lynx population reached a historic record of <strong>2,663 individuals</strong> in 2025, with 542 breeding females and 952 cubs born that year. The Iberian lynx has stepped back from the brink of extinction to become a symbol of cross-border hope, successfully leading the IUCN to downlist the species from 'Endangered' to '<span class=\\'status-vulnerable\\'>Vulnerable</span>' in 2024.",
     "map_title": "Geographical Distribution in 2025",
     "map_subtitle": "Number of Iberian lynxes censused in 2025. The size of each circle is proportional to the population.",
     "footer_source": "Data source: MITECO – Iberian lynx conservation programs in Spain and Portugal.",
@@ -55,12 +57,14 @@ const translations = {
     "legend_pt": "Portugal",
     "banner_title": "Evolution and Isolation",
     "banner_text": "The Iberian lynx (<em>Lynx pardinus</em>) is a unique species whose evolutionary history is marked by geographic isolation, and which at the beginning of the 21st century was cataloged by the IUCN (2002) as the most endangered feline on the planet in 'Critically Endangered' status. During the Pleistocene glaciations, feline populations were forced to seek refuge in southern Europe. Isolation in the Iberian Peninsula led to its divergence from the Eurasian lynx lineage (<em>Lynx lynx</em>) approximately 1 million years ago (Johnson et al., 2006). This prolonged isolation and successive demographic bottlenecks shaped its genome, leaving it vulnerable (Abascal et al., 2015). Recently, research published in <em>Nature Geoscience</em> (2022) based on historical records has revealed that its past distribution range was much wider than previously thought. This emphasizes that the current population recovery is actually a vital stabilization following a dramatic contraction, making this feline a true survivor and an exclusive treasure of the Iberian ecosystems.",
-    "references_title": "Scientific References",
+    "references_title": "References",
     "ref_1": "Abascal, F., Corvelo, A., Cruz, F., et al. (2015). Extreme genomic erosion after recurrent demographic bottlenecks in the highly endangered Iberian lynx. <em>Genome Biology</em>, 16(1), 251.",
     "ref_2": "Johnson, W. E., Eizirik, E., Pecon-Slattery, J., et al. (2006). The Late Miocene radiation of modern Felidae: A genetic assessment. <em>Science</em>, 311(5757), 73-77.",
     "ref_3": "Rodríguez, A., & Delibes, M. (1992). Current range and status of the Iberian lynx <em>Lynx pardinus</em>. <em>Biological Conservation</em>, 61(3), 189-196.",
     "ref_4": "Delibes, M., Rodríguez, A., & Ferreras, P. (2000). Action Plan for the Conservation of the Iberian Lynx in Europe. <em>Council of Europe Publishing</em>.",
     "ref_5": "Simón, M. A., et al. (2012). Ten years conserving the Iberian lynx. <em>Consejería de Agricultura, Pesca y Medio Ambiente, Junta de Andalucía</em>.",
-    "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906."
+    "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906.",
+    "ref_7": "IUCN (2002). <em>Lynx pardinus</em>. The IUCN Red List of Threatened Species 2002. Critically Endangered (CR).",
+    "footer_copyright": "&copy; 2026 plaTTdata. All rights reserved."
   }
 };

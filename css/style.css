@@ -20,6 +20,25 @@
 }
 
 /* --- CONFIGURACIÓN GENERAL --- */
+:root {
+  /* Paleta de Colores Principal */
+  --c-bg-beige: #f8f5ee;
+  --c-text-main: #333;
+  --c-text-muted: #555;
+  
+  /* Verdes del Lince */
+  --c-green-dark: #0d2210;
+  --c-green-primary: #0d5e17;
+  --c-green-medium: #65956f;
+  --c-green-light: #a8d5b1;
+  --c-green-sage: #d6ead5;
+  
+  /* Gráficas */
+  --c-chart-spain: #5b8fa8;
+  --c-chart-portugal: #c0644a;
+  --c-chart-highlight: #4a8f6a;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -108,16 +127,21 @@ p {
 
 /* --- PIE DE PÁGINA --- */
 .main-footer {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
+  width: 100%;
+  padding: 0 20px 40px; /* Elimina borde superior y reduce el espacio */
+  text-align: center; /* Centrado como se solicita */
+}
+
+.footer-copyright {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--c-green-medium);
 }
 
 /* --- ESTRUCTURA SCROLLYTELLING --- */
 main {
-  /* Difuminado suave desde el crema del fondo a un verde salvia, y vuelta al crema para transición limpia al mapa */
-  background: linear-gradient(180deg, #f8f5ee 0%, #e6f0e5 20%, #d6ead5 50%, #e6f0e5 80%, #f8f5ee 100%);
+  /* Difuminado suave desde el beige del fondo hacia un verde más presente, regresando a beige al final para el mapa */
+  background: linear-gradient(180deg, #f8f5ee 0%, #d6ead5 30%, #a8d5b1 85%, #65956f 100%);
   padding-top: 40px;
   padding-bottom: 80px;
   position: relative;
@@ -179,6 +203,11 @@ main {
 .step p {
   font-size: 1.3rem;
   line-height: 1.6;
+}
+
+.status-vulnerable {
+  color: var(--c-green-primary) ;
+  font-weight: 900;
 }
 
 /* --- RESPONSIVE: apila el texto y el gráfico en pantallas estrechas --- */
@@ -287,8 +316,8 @@ main {
   text-align: center;
   font-family: "Fraunces", serif;
   font-weight: 900;
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  color: #0d5e17;
+  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Igualado al tamaño de .hero-intro h2 */
+  color: var(--c-green-primary)
   margin-bottom: 8px;
   padding: 0 20px;
 }
@@ -304,6 +333,8 @@ main {
 #map {
   position: relative;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 560px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -419,10 +450,11 @@ main {
 
 /* --- REFERENCIAS --- */
 .references-section {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 40px 20px;
-  border-top: 1px solid #ddd;
+  max-width: 1200px;
+  margin: 80px auto 20px; /* Reducido el margen inferior */
+  padding: 40px 20px 10px; /* Reducido el padding inferior */
+  border-top: 2px solid var(--c-green-sage);
+  text-align: left;
 }
 
 .references-section h2 {
