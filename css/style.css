@@ -281,7 +281,7 @@ main {
 }
 
 .bar.highlight {
-  fill: #4a8f6a; /* verde salvia — año destacado */
+  fill: var(--c-chart-spain); /* azul — el año destacado también es España */
 }
 
 .bar-portugal {

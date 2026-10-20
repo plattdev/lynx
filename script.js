@@ -209,7 +209,7 @@ d3.csv("data.csv").then(function (data) {
       ];
     }
 
-    // El año más reciente revelado se resalta en verde sobre el mapa de barras
+    // El año más reciente revelado se marca con la clase "highlight" (azul España)
     const highlightYear = visibleYears.at(-1);
 
     spainBars
