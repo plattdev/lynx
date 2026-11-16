@@ -138,6 +138,17 @@ p {
   color: var(--c-green-medium);
 }
 
+.footer-copyright a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.footer-copyright a:hover {
+  color: var(--c-green-primary);
+}
+
 /* --- ESTRUCTURA SCROLLYTELLING --- */
 main {
   /* Difuminado suave desde el beige hacia tonos bosque apagados acordes al verde oscuro de la portada (#0d2210) */

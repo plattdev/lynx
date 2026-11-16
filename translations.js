@@ -31,7 +31,7 @@ const translations = {
     "ref_5": "Simón, M. A., et al. (2012). Ten years conserving the Iberian lynx. <em>Consejería de Agricultura, Pesca y Medio Ambiente, Junta de Andalucía</em>.",
     "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906.",
     "ref_7": "UICN (2002). <em>Lynx pardinus</em>. The IUCN Red List of Threatened Species 2002. En Peligro Crítico (CR).",
-    "footer_copyright": "&copy; 2026 plaTTdata. Todos los derechos reservados."
+    "footer_copyright": "&copy; 2026 <a href=\"https://portfolio-plattdata.vercel.app/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">plaTTdata</a>. Todos los derechos reservados."
   },
   en: {
     "title": "The Iberian Lynx Recovery",
@@ -65,6 +65,6 @@ const translations = {
     "ref_5": "Simón, M. A., et al. (2012). Ten years conserving the Iberian lynx. <em>Consejería de Agricultura, Pesca y Medio Ambiente, Junta de Andalucía</em>.",
     "ref_6": "Godoy, J. A., et al. (2009). Molecular ecology of the Iberian lynx: a retrospective and prospective view. <em>Conservation Genetics</em>, 10, 893-906.",
     "ref_7": "IUCN (2002). <em>Lynx pardinus</em>. The IUCN Red List of Threatened Species 2002. Critically Endangered (CR).",
-    "footer_copyright": "&copy; 2026 plaTTdata. All rights reserved."
+    "footer_copyright": "&copy; 2026 <a href=\"https://portfolio-plattdata.vercel.app/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">plaTTdata</a>. All rights reserved."
   }
 };
